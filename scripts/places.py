@@ -15,7 +15,7 @@ from rdflib import Graph, Namespace, URIRef
 from rdflib.namespace import RDF
 
 
-BASE_URL = "https://raw.githubusercontent.com/xyz-project/xyz-entities/refs/heads/main/indices/"  # noqa
+BASE_URL = "https://raw.githubusercontent.com/acdh-oeaw/gtrans-data/refs/heads/main/data/indices/"  # noqa
 
 
 def p89_falls_within(
@@ -35,7 +35,7 @@ def p89_falls_within(
 
 
 g = Graph()
-domain = "https://kaiserin-eleonora.oeaw.ac.at/"
+domain = "https://gtrans.acdh.oeaw.ac.at/"
 PU = Namespace(domain)
 
 if os.environ.get("NO_LIMIT"):
@@ -47,7 +47,7 @@ else:
 rdf_dir = "./datasets"
 os.makedirs(rdf_dir, exist_ok=True)
 entity_type = "place"
-index_file = f"./xyz-list{entity_type}.xml"
+index_file = f"./gtrans-list{entity_type}.xml"
 
 
 print("check if source file exists")
@@ -92,6 +92,6 @@ for x in tqdm(items, total=len(items)):
     g += p89_falls_within(subj, x, f"{PU}")
 
 
-save_path = os.path.join(rdf_dir, f"xyz_{entity_type}.nt")
+save_path = os.path.join(rdf_dir, f"gtrans_{entity_type}.nt")
 print(f"saving graph as {save_path}")
 g.serialize(save_path, format="nt", encoding="utf-8")
